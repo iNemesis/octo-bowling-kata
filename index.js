@@ -15,11 +15,14 @@ function calculateLineScore(line) {
         result += calculateFrameScore(currentFrame);
 
         const nextFrame = line[index+1];
+
         if (isSpare(currentFrame)) {
             result += nextFrame[0];
         }
+
         if (isStrike(currentFrame)) {
-            if (isStrike(nextFrame)) {
+            if (isStrike(nextFrame) && nextFrame) {
+                //TODO condition si on est à l'avant dernier
                 result += line[index+2][0]
             }
             result += calculateFrameScore(nextFrame);
@@ -35,7 +38,7 @@ function calculateFrameScore(frame) {
 }
 
 function isStrike(frame) {
-    if (frame[0] === 10) {
+    if (frame[0] === 10 && frame[1] === 0) {
         return true;
     }
 
