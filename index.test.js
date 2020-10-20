@@ -1,5 +1,9 @@
 const { expect } = require('@jest/globals');
-const {calculateLineScore, BowlingController, BowlingPlayer} = require('./index');
+const calculateLineScore = require('./index');
+const BowlingController = require('./BowlingController');
+const BowlingPlayer = require('./BowlingPlayer');
+
+const line = [[1,9],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]]
 
 describe('Kata bowling engine', () => {
     test('return sum of each knocked pins by roll', () => {
@@ -96,16 +100,24 @@ describe('Kata bowling engine', () => {
 })
 
 describe('Kata bowling controller', () => {
+    const player1 = new BowlingPlayer("player1", line)
+    const player2 = new BowlingPlayer("player2", line) 
+    const playerList = [ 
+        player1, player2
+    ]
+    const bowlingController = new BowlingController(playerList)
 
-    test('return player1 when player1 given', () => {
-        // Given
-        const playerName = "player1";
-        const playerLine = [];
-        const bowlingPlayer = new BowlingPlayer(playerName, playerLine);
-        const bowlingController = new BowlingController(playerName);
-        // When
-        const player = bowlingController.player;
-        // Then
-        expect(player).toEqual(playerName);
-    });
+    test('return list of given players', () => {
+        expect(bowlingController.getUsers()).toEqual(playerList)
+    })
+
+    test('return one of the users when given its name', () => {
+        const wantedPlayer = "player1"
+        expect(bowlingController.getUser(wantedPlayer)).toEqual(player1)
+    })
+
+    test('return score of given user by its name', () => {
+        const wantedPlayer = "player1"
+        expect(calculateLineScore(bowlingController.getUser(wantedPlayer).line)).toEqual(29)
+    })
 });

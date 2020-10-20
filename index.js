@@ -1,3 +1,6 @@
+const BowlingPlayer = require('./BowlingPlayer')
+const BowlingController = require('./BowlingController')
+
 function calculateLineScore(line) {
     let result = 0;
     const MAX_FRAMES = 10;
@@ -45,17 +48,4 @@ function isStrike(frame) {
     return false;
 }
 
-const BowlingController = function (playerName) {
-    this.player = playerName;
-}
-
-const BowlingPlayer = function (name, line) {
-    this.name = name;
-    this.line = line;
-}
-
-module.exports = {
-    calculateLineScore,
-    BowlingController,
-    BowlingPlayer
-}
+module.exports = calculateLineScore
