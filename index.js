@@ -8,8 +8,9 @@ function isSpare(frame) {
 
 function calculateLineScore(line) {
     let result = 0;
+    const MAX_FRAMES = 10;
 
-    for (let index = 0; index < line.length; index++) {
+    for (let index = 0; index < line.length && index < MAX_FRAMES; index++) {
         const currentFrame = line[index];
 
         result += calculateFrameScore(currentFrame);

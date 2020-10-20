@@ -61,10 +61,21 @@ describe('Kata bowling', () => {
         expect(result).toEqual(trueScore);
     })
 
-    test('return sum of each knocked pins by frame with a sequence of SPARE/STRIKE/STRIKE/SPARE', () => {
+    test('return sum of each knocked pins by frame with a sequence of Full STRIKES', () => {
         // Given
         const line = [[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,10]];
         const trueScore = 300;
+        // When
+        const result = calculateLineScore(line);
+        // Then
+        expect(result).toEqual(trueScore);
+    })
+
+
+    test('return sum of each knocked pins by frame with a sequence of Full SPARES', () => {
+        // Given
+        const line = [[1,9],[1,9],[1,9],[1,9],[1,9],[1,9],[1,9],[1,9],[1,9],[1,9],[9,0]];
+        const trueScore = 118;
         // When
         const result = calculateLineScore(line);
         // Then
