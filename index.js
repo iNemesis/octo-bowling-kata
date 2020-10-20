@@ -1,11 +1,3 @@
-function isSpare(frame) {
-    if (frame[0] !== 10 && calculateFrameScore(frame) === 10) {
-        return true;
-    }
-
-    return false;
-}
-
 function calculateLineScore(line) {
     let result = 0;
     const MAX_FRAMES = 10;
@@ -22,8 +14,7 @@ function calculateLineScore(line) {
         }
 
         if (isStrike(currentFrame)) {
-            if (isStrike(nextFrame) && nextFrame) {
-                //TODO condition si on est à l'avant dernier
+            if (isStrike(nextFrame)) {
                 result += line[index+2][0]
             }
             result += calculateFrameScore(nextFrame);
@@ -38,6 +29,14 @@ function calculateFrameScore(frame) {
     return frame.reduce(reducer, 0);
 }
 
+function isSpare(frame) {
+    if (frame[0] !== 10 && calculateFrameScore(frame) === 10) {
+        return true;
+    }
+
+    return false;
+}
+
 function isStrike(frame) {
     if (frame[0] === 10 && frame[1] === 0) {
         return true;
@@ -46,6 +45,17 @@ function isStrike(frame) {
     return false;
 }
 
+const BowlingController = function (playerName) {
+    this.player = playerName;
+}
+
+const BowlingPlayer = function (name, line) {
+    this.name = name;
+    this.line = line;
+}
+
 module.exports = {
-    calculateLineScore
+    calculateLineScore,
+    BowlingController,
+    BowlingPlayer
 }
